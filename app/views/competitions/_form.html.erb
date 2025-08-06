@@ -1,0 +1,31 @@
+<%= form_with(model: [:admin, competition], class: "contents") do |form| %>
+  <% if competition.errors.any? %>
+    <div class="mb-6 rounded-sm border border-danger bg-danger/10 px-4 py-3 text-danger">
+      <h2 class="font-medium mb-2"><%= pluralize(competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
+      <ul class="list-disc ml-6">
+        <% competition.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4.5">
+    <%= form.label :name, class: "mb-2.5 block text-black dark:text-white" %>
+    <%= form.text_field :name, class: "w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-meta-4 dark:focus:border-primary #{competition.errors[:name].any? ? 'border-danger' : ''}" %>
+  </div>
+
+  <div class="mb-4.5">
+    <%= form.label :event_initial_date, class: "mb-2.5 block text-black dark:text-white" %>
+    <%= form.date_field :event_initial_date, class: "w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-meta-4 dark:focus:border-primary #{competition.errors[:event_initial_date].any? ? 'border-danger' : ''}" %>
+  </div>
+
+  <div class="mb-4.5">
+    <%= form.label :event_final_date, class: "mb-2.5 block text-black dark:text-white" %>
+    <%= form.date_field :event_final_date, class: "w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-meta-4 dark:focus:border-primary #{competition.errors[:event_final_date].any? ? 'border-danger' : ''}" %>
+  </div>
+
+  <div class="flex justify-end gap-4.5">
+    <%= form.submit class: "inline-flex items-center justify-center rounded-md bg-primary py-2 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10" %>
+  </div>
+<% end %>

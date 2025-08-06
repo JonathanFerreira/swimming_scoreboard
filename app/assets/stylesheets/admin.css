@@ -1,0 +1,244 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+
+/* TailAdmin Color Variables */
+:root {
+  --primary: #3c50e0;
+  --primary-hover: #2e3bb8;
+  --secondary: #80caee;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --dark: #1e293b;
+  --dark-2: #1f2227;
+  --dark-3: #1a1c23;
+  --dark-4: #161c2d;
+  --dark-6: #0f172a;
+  --dark-7: #0d1433;
+  --body-color: #637381;
+  --body-color-dark: #aeb7c0;
+  --meta-1: #dc2626;
+  --meta-2: #eab308;
+  --meta-3: #3b82f6;
+  --meta-4: #8b5cf6;
+  --meta-5: #ef4444;
+  --meta-6: #06b6d4;
+  --meta-7: #10b981;
+  --meta-8: #f59e0b;
+  --meta-9: #84cc16;
+  --meta-10: #6366f1;
+  --meta-11: #8b5cf6;
+  --meta-12: #06b6d4;
+  --meta-13: #10b981;
+  --meta-14: #f59e0b;
+  --meta-15: #84cc16;
+  --meta-16: #6366f1;
+  --meta-17: #8b5cf6;
+  --meta-18: #06b6d4;
+  --meta-19: #10b981;
+  --meta-20: #f59e0b;
+  --stroke: #e2e8f0;
+  --stroke-dark: #2e3a47;
+  --boxdark: #24303f;
+  --boxdark-2: #1a222c;
+  --boxdark-3: #161d26;
+  --boxdark-4: #0f1419;
+  --boxdark-5: #0c1116;
+  --boxdark-6: #080b0e;
+  --boxdark-7: #060809;
+  --boxdark-8: #040506;
+  --boxdark-9: #020303;
+  --boxdark-10: #010101;
+  --boxdark-11: #000000;
+  --boxdark-12: #000000;
+  --boxdark-13: #000000;
+  --boxdark-14: #000000;
+  --boxdark-15: #000000;
+  --boxdark-16: #000000;
+  --boxdark-17: #000000;
+  --boxdark-18: #000000;
+  --boxdark-19: #000000;
+  --boxdark-20: #000000;
+  --boxdark-21: #000000;
+  --boxdark-22: #000000;
+  --boxdark-23: #000000;
+  --boxdark-24: #000000;
+  --boxdark-25: #000000;
+  --boxdark-26: #000000;
+  --boxdark-27: #000000;
+  --boxdark-28: #000000;
+  --boxdark-29: #000000;
+  --boxdark-30: #000000;
+  --boxdark-31: #000000;
+  --boxdark-32: #000000;
+  --boxdark-33: #000000;
+  --boxdark-34: #000000;
+  --boxdark-35: #000000;
+  --boxdark-36: #000000;
+  --boxdark-37: #000000;
+  --boxdark-38: #000000;
+  --boxdark-39: #000000;
+  --boxdark-40: #000000;
+  --boxdark-41: #000000;
+  --boxdark-42: #000000;
+  --boxdark-43: #000000;
+  --boxdark-44: #000000;
+  --boxdark-45: #000000;
+  --boxdark-46: #000000;
+  --boxdark-47: #000000;
+  --boxdark-48: #000000;
+  --boxdark-49: #000000;
+  --boxdark-50: #000000;
+  --boxdark-51: #000000;
+  --boxdark-52: #000000;
+  --boxdark-53: #000000;
+  --boxdark-54: #000000;
+  --boxdark-55: #000000;
+  --boxdark-56: #000000;
+  --boxdark-57: #000000;
+  --boxdark-58: #000000;
+  --boxdark-59: #000000;
+  --boxdark-60: #000000;
+  --boxdark-61: #000000;
+  --boxdark-62: #000000;
+  --boxdark-63: #000000;
+  --boxdark-64: #000000;
+  --boxdark-65: #000000;
+  --boxdark-66: #000000;
+  --boxdark-67: #000000;
+  --boxdark-68: #000000;
+  --boxdark-69: #000000;
+  --boxdark-70: #000000;
+  --boxdark-71: #000000;
+  --boxdark-72: #000000;
+  --boxdark-73: #000000;
+  --boxdark-74: #000000;
+  --boxdark-75: #000000;
+  --boxdark-76: #000000;
+  --boxdark-77: #000000;
+  --boxdark-78: #000000;
+  --boxdark-79: #000000;
+  --boxdark-80: #000000;
+  --boxdark-81: #000000;
+  --boxdark-82: #000000;
+  --boxdark-83: #000000;
+  --boxdark-84: #000000;
+  --boxdark-85: #000000;
+  --boxdark-86: #000000;
+  --boxdark-87: #000000;
+  --boxdark-88: #000000;
+  --boxdark-89: #000000;
+  --boxdark-90: #000000;
+  --boxdark-91: #000000;
+  --boxdark-92: #000000;
+  --boxdark-93: #000000;
+  --boxdark-94: #000000;
+  --boxdark-95: #000000;
+  --boxdark-96: #000000;
+  --boxdark-97: #000000;
+  --boxdark-98: #000000;
+  --boxdark-99: #000000;
+  --boxdark-100: #000000;
+}
+
+/* Custom Admin Styles */
+.text-bodydark1 {
+  color: #637381;
+}
+
+.text-bodydark2 {
+  color: #aeb7c0;
+}
+
+.bg-graydark {
+  background-color: #2e3a47;
+}
+
+.bg-meta-4 {
+  background-color: #8b5cf6;
+}
+
+.bg-meta-1 {
+  background-color: #dc2626;
+}
+
+.border-stroke {
+  border-color: #e2e8f0;
+}
+
+.border-strokedark {
+  border-color: #2e3a47;
+}
+
+.bg-boxdark {
+  background-color: #24303f;
+}
+
+.bg-meta-4 {
+  background-color: #8b5cf6;
+}
+
+.drop-shadow-1 {
+  box-shadow: 0px 1px 3px rgba(7, 7, 77, 0.1);
+}
+
+.shadow-2 {
+  box-shadow: 0px 1px 4px rgba(7, 7, 77, 0.1);
+}
+
+/* Animation classes */
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Responsive utilities */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .dark\:bg-boxdark {
+    background-color: #24303f;
+  }
+
+  .dark\:text-white {
+    color: #ffffff;
+  }
+
+  .dark\:border-strokedark {
+    border-color: #2e3a47;
+  }
+
+  .dark\:bg-meta-4 {
+    background-color: #8b5cf6;
+  }
+
+  .dark\:drop-shadow-none {
+    box-shadow: none;
+  }
+}

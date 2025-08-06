@@ -1,0 +1,41 @@
+<% content_for :title, "New Competition" %>
+
+<div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+  <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <h2 class="text-title-md2 font-bold text-black dark:text-white">
+      New Competition
+    </h2>
+    <nav>
+      <ol class="flex items-center gap-2">
+        <li>
+          <a class="font-medium" href="/admin">Dashboard /</a>
+        </li>
+        <li>
+          <a class="font-medium" href="/admin/competitions">Competitions /</a>
+        </li>
+        <li class="font-medium text-primary">New Competition</li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div class="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+      <h3 class="font-medium text-black dark:text-white">
+        Competition Information
+      </h3>
+    </div>
+    <div class="p-6.5">
+      <%= render "form", competition: @competition %>
+    </div>
+  </div>
+
+  <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
+    <%= link_to admin_competitions_path, class: "inline-flex items-center justify-center rounded-md border border-stroke bg-white py-2 px-10 text-center font-medium text-black hover:bg-opacity-90 lg:px-8 xl:px-10" do %>
+      <svg class="mr-2 fill-current" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 0.5C3.6 0.5 0 4.1 0 8.5C0 12.9 3.6 16.5 8 16.5C12.4 16.5 16 12.9 16 8.5C16 4.1 12.4 0.5 8 0.5ZM8 14.5C4.4 14.5 1.5 11.6 1.5 8C1.5 4.4 4.4 1.5 8 1.5C11.6 1.5 14.5 4.4 14.5 8C14.5 11.6 11.6 14.5 8 14.5Z" fill=""></path>
+        <path d="M12.375 6.4375H9.5625V3.625C9.5625 3.25 9.1875 2.875 8.8125 2.875C8.4375 2.875 8.0625 3.25 8.0625 3.625V6.4375H5.25C4.875 6.4375 4.5 6.8125 4.5 7.1875C4.5 7.5625 4.875 7.9375 5.25 7.9375H8.0625V10.75C8.0625 11.125 8.4375 11.5 8.8125 11.5C9.1875 11.5 9.5625 11.125 9.5625 10.75V7.9375H12.375C12.75 7.9375 13.125 7.5625 13.125 7.1875C13.125 6.8125 12.75 6.4375 12.375 6.4375Z" fill=""></path>
+      </svg>
+      Back to Competitions
+    <% end %>
+  </div>
+</div>
