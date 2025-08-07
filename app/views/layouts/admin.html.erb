@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Swimming Scoreboard" %></title>
+    <title><%= content_for(:title) || "Swimming Scoreboard Admin" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -18,9 +18,36 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="bg-gray-50">
+    <div class="flex h-screen bg-gray-100">
+      <!-- Desktop Sidebar -->
+      <%= render 'shared/sidebar' %>
+
+      <!-- Mobile menu button and content wrapper -->
+      <div class="flex flex-1 flex-col">
+        <!-- Mobile menu button -->
+        <%= render 'shared/mobile_sidebar' %>
+
+        <!-- Main content -->
+        <main class="flex-1">
+          <div class="py-6">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+              <%= yield %>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      function toggleMobileMenu() {
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        if (mobileSidebar.classList.contains('hidden')) {
+          mobileSidebar.classList.remove('hidden');
+        } else {
+          mobileSidebar.classList.add('hidden');
+        }
+      }
+    </script>
   </body>
 </html>
