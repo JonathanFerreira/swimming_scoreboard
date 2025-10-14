@@ -4,6 +4,8 @@ class CreateCompetitions < ActiveRecord::Migration[7.2]
       t.string :name
       t.date :event_initial_date
       t.date :event_final_date
+      t.string :address
+      t.text :description
 
       t.timestamps
     end
