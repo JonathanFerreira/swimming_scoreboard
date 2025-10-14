@@ -1,0 +1,110 @@
+<!-- Hero Section with Swimming Background -->
+<div class="relative min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed"
+     style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.pexels.com/photos/261185/pexels-photo-261185.jpeg');">
+
+  <!-- Header -->
+  <div class="relative z-10 pt-8 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+          Competições de Natação
+        </h1>
+        <p class="text-xl md:text-2xl text-blue-100 mb-8 drop-shadow-md">
+          Descubra os próximos eventos aquáticos
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Competitions Grid -->
+  <div class="relative z-10 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <% if @competitions.any? %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <% @competitions.each do |competition| %>
+            <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 border border-blue-200/50 bg-gradient-to-br from-white/95 to-blue-50/95">
+              <div class="p-6">
+                <!-- Competition Name -->
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">
+                  <%= competition.name %>
+                </h3>
+
+                <!-- Date Information -->
+                <div class="space-y-3 mb-4">
+                  <div class="flex items-center text-gray-700">
+                    <svg class="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <div class="flex flex-col sm:flex-row sm:items-center">
+                      <span class="font-semibold text-sm sm:text-base">Data de Início:</span>
+                      <span class="ml-0 sm:ml-2 text-sm sm:text-base"><%= competition.event_initial_date.strftime("%d/%m/%Y") %></span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center text-gray-700">
+                    <svg class="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <div class="flex flex-col sm:flex-row sm:items-center">
+                      <span class="font-semibold text-sm sm:text-base">Data Final:</span>
+                      <span class="ml-0 sm:ml-2 text-sm sm:text-base"><%= competition.event_final_date.strftime("%d/%m/%Y") %></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Address Information -->
+                <div class="mb-4">
+                  <div class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <div>
+                      <span class="font-semibold block mb-1 text-sm sm:text-base">Local:</span>
+                      <span class="text-sm">
+                        <% if competition.respond_to?(:address) && competition.address.present? %>
+                          <%= competition.address %>
+                        <% else %>
+                          Complexo Aquático Municipal<br>
+                          Rua das Águas, 123 - Centro
+                        <% end %>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Duration Badge -->
+                <div class="text-center mb-4">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <%= pluralize((competition.event_final_date - competition.event_initial_date).to_i + 1, 'dia') %>
+                  </span>
+                </div>
+
+                <!-- Action Button -->
+                <div class="text-center">
+                  <button class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                    Ver Detalhes
+                  </button>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <!-- Empty State -->
+        <div class="text-center py-16">
+          <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-xl p-8 max-w-md mx-auto border border-blue-200/50 bg-gradient-to-br from-white/95 to-blue-50/95">
+            <svg class="w-16 h-16 text-blue-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Nenhuma Competição Encontrada</h3>
+            <p class="text-gray-600">Ainda não há competições cadastradas. Volte em breve!</p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
