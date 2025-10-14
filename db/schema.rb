@@ -15,6 +15,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_08_215554) do
     t.string "name"
     t.date "event_initial_date"
     t.date "event_final_date"
+    t.string "address"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
