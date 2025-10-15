@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_09_08_215554) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_15_003335) do
   create_table "competitions", force: :cascade do |t|
     t.string "name"
     t.date "event_initial_date"
@@ -19,6 +19,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_08_215554) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "proofs", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.integer "competition_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["competition_id"], name: "index_proofs_on_competition_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,4 +41,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_08_215554) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "proofs", "competitions"
 end
