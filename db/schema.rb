@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_15_003335) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_20_225826) do
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "age_min", null: false
+    t.integer "age_max", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["age_max"], name: "index_categories_on_age_max"
+    t.index ["age_min"], name: "index_categories_on_age_min"
+    t.index ["name"], name: "index_categories_on_name", unique: true
+  end
+
   create_table "competitions", force: :cascade do |t|
     t.string "name"
     t.date "event_initial_date"
