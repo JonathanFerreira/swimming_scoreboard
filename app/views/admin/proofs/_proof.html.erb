@@ -11,4 +11,8 @@
     <strong class="block font-medium mb-1">Competition:</strong>
     <%= proof.competition.name %>
   </div>
+  <div>
+    <strong class="block font-medium mb-1">Categorias:</strong>
+    <%= proof.categories.map(&:name).join(", ") %>
+  </div>
 </div>

@@ -26,6 +26,20 @@
     <%= form.collection_select :competition_id, Competition.all, :id, :name, {}, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": proof.errors[:competition_id].none?, "border-red-400 focus:outline-red-600": proof.errors[:competition_id].any?}] %>
   </div>
 
+  <h3 class="text-lg font-semibold text-gray-900 mb-4">Categorias</h3>
+  <div class="my-5">
+    <div class="border border-gray-200 rounded-lg p-4" data-controller="nested-rondo" data-nested-rondo-field-class-value="proof-category-field">
+      <div data-nested-rondo-target="fieldContain">
+        <%= form.fields_for :proof_categories do |proof_category| %>
+          <%= render "proof_category_fields", f: proof_category %>
+        <% end %>
+      </div>
+      <div class="mt-4">
+        <%= link_to_add_association "Adicionar Categoria", form, :proof_categories, {}, class: "inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
+      </div>
+    </div>
+  </div>
+
   <div class="inline">
     <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
   </div>

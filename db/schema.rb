@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_20_225826) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_20_233203) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "age_min", null: false
@@ -30,6 +30,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_20_225826) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "proof_categories", force: :cascade do |t|
+    t.integer "proof_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_proof_categories_on_category_id"
+    t.index ["proof_id"], name: "index_proof_categories_on_proof_id"
   end
 
   create_table "proofs", force: :cascade do |t|
@@ -53,5 +62,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_20_225826) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "proof_categories", "categories"
+  add_foreign_key "proof_categories", "proofs"
   add_foreign_key "proofs", "competitions"
 end
