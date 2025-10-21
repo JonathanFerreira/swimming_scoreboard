@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_21_004249) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_21_013832) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "age_min", null: false
@@ -39,6 +39,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_21_004249) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_proof_categories_on_category_id"
     t.index ["proof_id"], name: "index_proof_categories_on_proof_id"
+  end
+
+  create_table "proof_category_swimmers", force: :cascade do |t|
+    t.integer "proof_id", null: false
+    t.integer "category_id", null: false
+    t.integer "swimmer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "idx_proof_category_swimmers_on_category_id"
+    t.index ["proof_id", "swimmer_id"], name: "idx_proof_category_swimmers_on_proof_id_swimmer_id", unique: true
+    t.index ["proof_id"], name: "idx_proof_category_swimmers_on_proof_id"
+    t.index ["swimmer_id"], name: "idx_proof_category_swimmers_on_swimmer_id"
   end
 
   create_table "proofs", force: :cascade do |t|
@@ -86,6 +98,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_21_004249) do
 
   add_foreign_key "proof_categories", "categories"
   add_foreign_key "proof_categories", "proofs"
+  add_foreign_key "proof_category_swimmers", "categories"
+  add_foreign_key "proof_category_swimmers", "proofs"
+  add_foreign_key "proof_category_swimmers", "swimmers"
   add_foreign_key "proofs", "competitions"
   add_foreign_key "swimmers", "teams"
 end

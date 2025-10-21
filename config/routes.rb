@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :proof_category_swimmers
   resources :teams
   resources :swimmer_teams
   resources :swimmers
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :swimmers
     resources :teams
+    resources :proof_category_swimmers
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
