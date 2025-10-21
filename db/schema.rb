@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_20_233203) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_21_004249) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "age_min", null: false
@@ -50,6 +50,28 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_20_233203) do
     t.index ["competition_id"], name: "index_proofs_on_competition_id"
   end
 
+  create_table "swimmers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "phone_number", null: false
+    t.date "birthdate", null: false
+    t.string "gender", null: false
+    t.integer "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["birthdate"], name: "index_swimmers_on_birthdate"
+    t.index ["gender"], name: "index_swimmers_on_gender"
+    t.index ["name"], name: "index_swimmers_on_name", unique: true
+    t.index ["phone_number"], name: "index_swimmers_on_phone_number"
+    t.index ["team_id"], name: "index_swimmers_on_team_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_teams_on_name", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -65,4 +87,5 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_20_233203) do
   add_foreign_key "proof_categories", "categories"
   add_foreign_key "proof_categories", "proofs"
   add_foreign_key "proofs", "competitions"
+  add_foreign_key "swimmers", "teams"
 end

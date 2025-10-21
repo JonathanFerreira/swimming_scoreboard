@@ -1,0 +1,51 @@
+<% content_for :title, "Teams" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="font-bold text-4xl">Teams</h1>
+    <%= link_to "New team", new_admin_team_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  </div>
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Nome
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Ações
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @teams.any? %>
+          <% @teams.each do |team| %>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <%= team.name %>
+              </th>
+              <td class="px-6 py-4">
+                <div class="flex space-x-2">
+                  <%= link_to "Show", admin_team_path(team), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+                  <%= link_to "Edit", edit_admin_team_path(team), class: "font-medium text-green-600 dark:text-green-500 hover:underline" %>
+                  <%= button_to "Delete", admin_team_path(team), method: :delete, class: "font-medium text-red-600 dark:text-red-500 hover:underline", data: { turbo_confirm: "Are you sure?" } %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td colspan="6" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+              No teams found.
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

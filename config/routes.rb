@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :teams
+  resources :swimmer_teams
+  resources :swimmers
   resources :categories
   root 'home#index'
 
@@ -12,6 +15,8 @@ Rails.application.routes.draw do
     resources :competitions
     resources :proofs
     resources :categories
+    resources :swimmers
+    resources :teams
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
