@@ -56,3 +56,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "rondo_form", "~> 1.0"
+
+gem "pagy", "~> 9.4"

@@ -29,3 +29,15 @@
 
 en:
   hello: "Hello world"
+  pagy:
+    nav:
+      prev: "Previous"
+      next: "Next"
+      page: "Page"
+      gap: "..."
+      of: "of"
+      results: "results"
+      showing: "Showing"
+      to: "to"
+      of: "of"
+      results: "results"

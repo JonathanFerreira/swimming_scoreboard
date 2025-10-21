@@ -4,7 +4,7 @@ class Admin::SwimmersController < ApplicationController
 
   # GET /swimmers or /swimmers.json
   def index
-    @swimmers = Swimmer.all
+    @pagy, @swimmers = pagy(Swimmer.all)
   end
 
   # GET /swimmers/1 or /swimmers/1.json
