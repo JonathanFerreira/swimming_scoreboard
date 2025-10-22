@@ -60,6 +60,16 @@ class Admin::ProofCategorySwimmersController < ApplicationController
     end
   end
 
+  # GET /proof_category_swimmers/swimmers_by_category
+  def swimmers_by_category
+    category = Category.find(params[:category_id])
+    swimmers = Swimmer.by_age_range(category.age_min, category.age_max)
+
+    respond_to do |format|
+      format.json { render json: swimmers.map { |swimmer| { id: swimmer.id, name: swimmer.name } } }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_proof_category_swimmer

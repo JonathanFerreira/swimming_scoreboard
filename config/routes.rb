@@ -18,7 +18,11 @@ Rails.application.routes.draw do
     resources :categories
     resources :swimmers
     resources :teams
-    resources :proof_category_swimmers
+    resources :proof_category_swimmers do
+      collection do
+        get :swimmers_by_category
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

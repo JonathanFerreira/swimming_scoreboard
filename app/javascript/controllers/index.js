@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import NestedRondoController from "./nested_rondo_controller"
 application.register("nested-rondo", NestedRondoController)
+
+import SwimmerLoaderController from "./swimmer_loader_controller"
+application.register("swimmer-loader", SwimmerLoaderController)

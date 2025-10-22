@@ -13,17 +13,28 @@
 
   <div class="my-5">
     <%= form.label :proof_id %>
-    <%= form.collection_select :proof_id, Proof.all, :id, :display_name, { include_blank: true }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": proof_category_swimmer.errors[:proof_id].none?, "border-red-400 focus:outline-red-600": proof_category_swimmer.errors[:proof_id].any?}] %>
+    <%= form.collection_select :proof_id, Proof.all, :id, :display_name, { include_blank: 'Selecione uma prova' }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": proof_category_swimmer.errors[:proof_id].none?, "border-red-400 focus:outline-red-600": proof_category_swimmer.errors[:proof_id].any?}] %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :category_id %>
-    <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: true }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": proof_category_swimmer.errors[:category_id].none?, "border-red-400 focus:outline-red-600": proof_category_swimmer.errors[:category_id].any?}] %>
-  </div>
+  <div data-controller="swimmer-loader" data-swimmer-loader-url-value="/admin/proof_category_swimmers/swimmers_by_category">
+    <div class="my-5">
+      <%= form.label :category_id %>
+      <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: 'Selecione uma categoria' }, {
+        data: {
+          swimmer_loader_target: "categorySelect",
+          action: "change->swimmer-loader#loadSwimmers"
+        },
+        class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": proof_category_swimmer.errors[:category_id].none?, "border-red-400 focus:outline-red-600": proof_category_swimmer.errors[:category_id].any?}]
+      } %>
+    </div>
 
-  <div class="my-5">
-    <%= form.label :swimmer_id %>
-    <%= form.collection_select :swimmer_id, Swimmer.all, :id, :name, { include_blank: true }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": proof_category_swimmer.errors[:swimmer_id].none?, "border-red-400 focus:outline-red-600": proof_category_swimmer.errors[:swimmer_id].any?}] %>
+    <div class="my-5">
+      <%= form.label :swimmer_id %>
+      <%= form.collection_select :swimmer_id, [], :id, :name, { include_blank: 'Selecione um nadador' }, {
+        data: { swimmer_loader_target: "swimmerSelect" },
+        class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": proof_category_swimmer.errors[:swimmer_id].none?, "border-red-400 focus:outline-red-600": proof_category_swimmer.errors[:swimmer_id].any?}]
+      } %>
+    </div>
   </div>
 
   <div class="inline">

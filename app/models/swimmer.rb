@@ -10,4 +10,15 @@ class Swimmer < ApplicationRecord
   validates :name, uniqueness: true
 
   delegate :name, to: :team, prefix: true, allow_nil: true
+
+  def self.by_age_range(min_age, max_age)
+    where("(strftime('%Y', 'now') - strftime('%Y', birthdate)) BETWEEN ? AND ?", min_age, max_age)
+  end
+
+  def age
+    today = Date.current
+    age = today.year - birthdate.year
+    age -= 1 if today < Date.new(today.year, birthdate.month, birthdate.day)
+    age
+  end
 end
