@@ -9,7 +9,7 @@
 #   end
 
 
-user = User.create!(email: 'admin@example.com', password: 'password')
+user = User.create!(email: 'admin@example.com', password: 'qwerty')
 
 competition = Competition.create!(
   name: 'Track In Field 2025',
@@ -45,7 +45,11 @@ proofs = []
   { name: '25 Costas', slug: 'prova-3', competition_id: competition.id },
   { name: '25 Borboleta', slug: 'prova-3', competition_id: competition.id },
 ].each do |proof_data|
-  proofs << Proof.create!(proof_data)
+  proof = Proof.create!(proof_data)
+  categories.each do |category|
+    proof.proof_categories.create!(category_id: category.id)
+  end
+  proofs << proof
 end
 
 swimmers = []
