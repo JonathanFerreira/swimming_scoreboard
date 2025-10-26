@@ -1,0 +1,66 @@
+<% content_for :title, "Balizas" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="font-bold text-4xl">Balizas</h1>
+  </div>
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Competição
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Prova
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Categoria
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Bateria
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Ações
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @swimming_marker_blocks.any? %>
+          <% @swimming_marker_blocks.each do |swimming_marker_block| %>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <%= swimming_marker_block.competition_name %>
+              </th>
+              <td class="px-6 py-4">
+                <%= swimming_marker_block.proof_name %>
+              </td>
+              <td class="px-6 py-4">
+                <%= swimming_marker_block.category_name %>
+              </td>
+              <td class="px-6 py-4">
+                Bateria <%= swimming_marker_block.position %>
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex space-x-2">
+                  <%= link_to "Show", admin_swimming_marker_block_list_path(swimming_marker_block), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td colspan="6" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+              No swimming marker lanes found.
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

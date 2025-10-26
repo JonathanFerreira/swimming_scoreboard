@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_26_182911) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_26_211130) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "age_min", null: false
@@ -103,6 +103,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_182911) do
     t.integer "lane"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.time "recorded_time", precision: 3
+    t.index ["recorded_time"], name: "index_swimming_marker_lanes_on_recorded_time"
     t.index ["swimmer_id"], name: "index_swimming_marker_lanes_on_swimmer_id"
     t.index ["swimming_marker_block_id", "lane"], name: "idx_on_swimming_marker_block_id_lane_10e8ac75a6", unique: true
     t.index ["swimming_marker_block_id", "swimmer_id"], name: "idx_swimming_marker_lanes_on_swimming_marker_block_id_swimmer_id", unique: true

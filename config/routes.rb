@@ -26,6 +26,12 @@ Rails.application.routes.draw do
 
       resources :swimming_marker_blocks
     end
+
+    resources :swimming_marker_block_lists do
+      member do
+        patch :update_time
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

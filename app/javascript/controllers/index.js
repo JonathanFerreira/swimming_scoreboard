@@ -15,3 +15,6 @@ application.register("nested-rondo", NestedRondoController)
 
 import SwimmerLoaderController from "./swimmer_loader_controller"
 application.register("swimmer-loader", SwimmerLoaderController)
+
+import TimeEditorController from "./time_editor_controller"
+application.register("time-editor", TimeEditorController)

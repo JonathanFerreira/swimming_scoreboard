@@ -1,5 +1,8 @@
 class SwimmingMarkerBlock < ApplicationRecord
   belongs_to :swimming_marker_group
+  has_one :proof, through: :swimming_marker_group
+  has_one :category, through: :swimming_marker_group
+  has_one :competition, through: :proof
   has_many :swimming_marker_lanes, dependent: :destroy
   has_many :swimmers, through: :swimming_marker_lanes
 
@@ -8,6 +11,10 @@ class SwimmingMarkerBlock < ApplicationRecord
   validates :position, presence: true, uniqueness: { scope: :swimming_marker_group_id }
   validate :validate_unique_swimmers
   validate :validate_quantity_of_lanes
+
+  delegate :name, to: :proof, prefix: true, allow_nil: true
+  delegate :name, to: :category, prefix: true, allow_nil: true
+  delegate :name, to: :competition, prefix: true, allow_nil: true
 
   private
 
