@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :swimming_marker_groups
   resources :proof_category_swimmers
   resources :teams
   resources :swimmer_teams
@@ -21,6 +22,11 @@ Rails.application.routes.draw do
     resources :proof_category_swimmers do
       collection do
         get :swimmers_by_category
+        get :categories_by_proof
+      end
+    end
+    resources :swimming_marker_groups do
+      collection do
         get :categories_by_proof
       end
     end

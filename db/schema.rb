@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_26_162641) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_26_175953) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "age_min", null: false
@@ -79,6 +79,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_162641) do
     t.index ["team_id"], name: "index_swimmers_on_team_id"
   end
 
+  create_table "swimming_marker_groups", force: :cascade do |t|
+    t.integer "proof_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_swimming_marker_groups_on_category_id"
+    t.index ["proof_id"], name: "index_swimming_marker_groups_on_proof_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -105,4 +114,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_162641) do
   add_foreign_key "proof_category_swimmers", "swimmers"
   add_foreign_key "proofs", "competitions"
   add_foreign_key "swimmers", "teams"
+  add_foreign_key "swimming_marker_groups", "categories"
+  add_foreign_key "swimming_marker_groups", "proofs"
 end
