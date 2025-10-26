@@ -5,6 +5,8 @@ class Swimmer < ApplicationRecord
   }
 
   belongs_to :team, optional: true
+  has_many :swimming_marker_lanes, dependent: :destroy
+  has_many :swimming_marker_blocks, through: :swimming_marker_lanes
 
   validates :name, :phone_number, :birthdate, :gender, presence: true
   validates :name, uniqueness: true

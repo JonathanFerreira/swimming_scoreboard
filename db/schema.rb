@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_26_175953) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_26_182911) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "age_min", null: false
@@ -79,6 +79,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_175953) do
     t.index ["team_id"], name: "index_swimmers_on_team_id"
   end
 
+  create_table "swimming_marker_blocks", force: :cascade do |t|
+    t.integer "swimming_marker_group_id", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position"], name: "index_swimming_marker_blocks_on_position", unique: true
+    t.index ["swimming_marker_group_id"], name: "index_swimming_marker_blocks_on_swimming_marker_group_id"
+  end
+
   create_table "swimming_marker_groups", force: :cascade do |t|
     t.integer "proof_id", null: false
     t.integer "category_id", null: false
@@ -86,6 +95,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_175953) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_swimming_marker_groups_on_category_id"
     t.index ["proof_id"], name: "index_swimming_marker_groups_on_proof_id"
+  end
+
+  create_table "swimming_marker_lanes", force: :cascade do |t|
+    t.integer "swimming_marker_block_id", null: false
+    t.integer "swimmer_id", null: false
+    t.integer "lane"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["swimmer_id"], name: "index_swimming_marker_lanes_on_swimmer_id"
+    t.index ["swimming_marker_block_id", "lane"], name: "idx_on_swimming_marker_block_id_lane_10e8ac75a6", unique: true
+    t.index ["swimming_marker_block_id", "swimmer_id"], name: "idx_swimming_marker_lanes_on_swimming_marker_block_id_swimmer_id", unique: true
+    t.index ["swimming_marker_block_id"], name: "index_swimming_marker_lanes_on_swimming_marker_block_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -114,6 +135,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_175953) do
   add_foreign_key "proof_category_swimmers", "swimmers"
   add_foreign_key "proofs", "competitions"
   add_foreign_key "swimmers", "teams"
+  add_foreign_key "swimming_marker_blocks", "swimming_marker_groups"
   add_foreign_key "swimming_marker_groups", "categories"
   add_foreign_key "swimming_marker_groups", "proofs"
+  add_foreign_key "swimming_marker_lanes", "swimmers"
+  add_foreign_key "swimming_marker_lanes", "swimming_marker_blocks"
 end

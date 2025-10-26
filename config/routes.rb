@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  resources :swimming_marker_groups
-  resources :proof_category_swimmers
-  resources :teams
-  resources :swimmer_teams
-  resources :swimmers
-  resources :categories
   root 'home#index'
 
 
@@ -29,6 +23,8 @@ Rails.application.routes.draw do
       collection do
         get :categories_by_proof
       end
+
+      resources :swimming_marker_blocks
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

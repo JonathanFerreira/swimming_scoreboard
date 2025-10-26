@@ -1,0 +1,36 @@
+<%= form_with(model: [:admin, @swimming_marker_group, swimming_marker_block], class: "contents") do |form| %>
+  <% if swimming_marker_block.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(swimming_marker_block.errors.count, "error") %> prohibited this swimming_marker_block from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% swimming_marker_block.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :position, "Número da bateria" %>
+    <%= form.number_field :position, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": swimming_marker_block.errors[:position].none?, "border-red-400 focus:outline-red-600": swimming_marker_block.errors[:position].any?}] %>
+  </div>
+
+  <h3 class="text-lg font-semibold text-gray-900 mb-4">Raias</h3>
+  <div class="my-5">
+    <div class="border border-gray-200 rounded-lg p-4" data-controller="nested-rondo" data-nested-rondo-field-class-value="swimming-marker-lane-field">
+      <div data-nested-rondo-target="fieldContain">
+        <%= form.fields_for :swimming_marker_lanes do |swimming_marker_lane| %>
+          <%= render "swimming_marker_lane_fields", f: swimming_marker_lane %>
+        <% end %>
+      </div>
+      <div class="mt-4">
+        <%= link_to_add_association "Adicionar raia", form, :swimming_marker_lanes, {}, class: "inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
