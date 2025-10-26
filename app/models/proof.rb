@@ -1,7 +1,8 @@
 class Proof < ApplicationRecord
   belongs_to :competition
 
-  validates :name, :slug, :competition_id, presence: true
+  validates :name, :slug, :competition_id, :lane_quantity, presence: true
+  validates :lane_quantity, numericality: { greater_than: 0, less_than_or_equal_to: 10 }
 
   has_many :proof_categories, dependent: :destroy
   has_many :categories, through: :proof_categories

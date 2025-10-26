@@ -66,7 +66,7 @@ class Admin::ProofsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def proof_params
-      params.require(:proof).permit(:name, :slug, :competition_id,
+      params.require(:proof).permit(:name, :slug, :competition_id, :lane_quantity,
                                    proof_categories_attributes: [:id, :category_id, :_destroy])
     end
 end

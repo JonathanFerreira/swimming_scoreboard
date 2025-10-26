@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_21_013832) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_26_162641) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "age_min", null: false
@@ -59,7 +59,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_21_013832) do
     t.integer "competition_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "lane_quantity"
     t.index ["competition_id"], name: "index_proofs_on_competition_id"
+    t.index ["lane_quantity"], name: "index_proofs_on_lane_quantity"
   end
 
   create_table "swimmers", force: :cascade do |t|
