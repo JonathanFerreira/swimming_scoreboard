@@ -10,17 +10,21 @@
       </ul>
     </div>
   <% end %>
+  <div data-controller="category-by-proof-loader swimmer-loader"
+       data-category-by-proof-loader-url-value="/admin/proof_category_swimmers/categories_by_proof"
+       data-swimmer-loader-url-value="/admin/proof_category_swimmers/swimmers_by_category">
+    <div class="my-5">
+      <%= form.label :proof_id %>
+      <%= form.collection_select :proof_id, Proof.all, :id, :display_name, { include_blank: 'Selecione uma prova' },
+      data: { category_by_proof_loader_target: "proofSelect", action: "change->category-by-proof-loader#loadCategories" },
+      class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": proof_category_swimmer.errors[:proof_id].none?, "border-red-400 focus:outline-red-600": proof_category_swimmer.errors[:proof_id].any?}] %>
+    </div>
 
-  <div class="my-5">
-    <%= form.label :proof_id %>
-    <%= form.collection_select :proof_id, Proof.all, :id, :display_name, { include_blank: 'Selecione uma prova' }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": proof_category_swimmer.errors[:proof_id].none?, "border-red-400 focus:outline-red-600": proof_category_swimmer.errors[:proof_id].any?}] %>
-  </div>
-
-  <div data-controller="swimmer-loader" data-swimmer-loader-url-value="/admin/proof_category_swimmers/swimmers_by_category">
     <div class="my-5">
       <%= form.label :category_id %>
       <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: 'Selecione uma categoria' }, {
         data: {
+          category_by_proof_loader_target: "categorySelect",
           swimmer_loader_target: "categorySelect",
           action: "change->swimmer-loader#loadSwimmers"
         },
@@ -35,9 +39,9 @@
         class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": proof_category_swimmer.errors[:swimmer_id].none?, "border-red-400 focus:outline-red-600": proof_category_swimmer.errors[:swimmer_id].any?}]
       } %>
     </div>
-  </div>
 
-  <div class="inline">
-    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+    <div class="inline">
+      <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+    </div>
   </div>
 <% end %>

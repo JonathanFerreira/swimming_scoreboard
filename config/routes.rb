@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :proof_category_swimmers do
       collection do
         get :swimmers_by_category
+        get :categories_by_proof
       end
     end
   end

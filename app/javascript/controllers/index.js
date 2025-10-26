@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import CategoryByProofLoaderController from "./category_by_proof_loader_controller"
+application.register("category-by-proof-loader", CategoryByProofLoaderController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

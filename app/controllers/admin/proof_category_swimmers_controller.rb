@@ -70,6 +70,16 @@ class Admin::ProofCategorySwimmersController < ApplicationController
     end
   end
 
+  # GET /proof_category_swimmers/categories_by_proof
+  def categories_by_proof
+    proof = Proof.find(params[:proof_id])
+    categories = proof.categories
+
+    respond_to do |format|
+      format.json { render json: categories.map { |category| { id: category.id, name: category.name } } }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_proof_category_swimmer
