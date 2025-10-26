@@ -223,3 +223,15 @@ pt-BR:
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
     pm: pm
+  pagy:
+    nav:
+      prev: "Anterior"
+      next: "Próximo"
+      page: "Página"
+      gap: "..."
+      of: "de"
+      results: "resultados"
+      showing: "Mostrando"
+      to: "para"
+      of: "of"
+      results: "resultados"
