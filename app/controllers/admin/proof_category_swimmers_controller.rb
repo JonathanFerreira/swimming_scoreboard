@@ -4,7 +4,26 @@ class Admin::ProofCategorySwimmersController < ApplicationController
 
   # GET /proof_category_swimmers or /proof_category_swimmers.json
   def index
-    @proof_category_swimmers = ProofCategorySwimmer.all
+    @proof_category_swimmers = ProofCategorySwimmer.includes(:proof, :category, :swimmer, proof: :competition)
+
+    # Aplicar filtros
+    if params[:competition_id].present?
+      @proof_category_swimmers = @proof_category_swimmers.joins(proof: :competition)
+      @proof_category_swimmers = @proof_category_swimmers.where(proofs: { competition_id: params[:competition_id] })
+    end
+
+    @proof_category_swimmers = @proof_category_swimmers.where(proof_id: params[:proof_id]) if params[:proof_id].present?
+
+    if params[:swimmer_name].present?
+      @proof_category_swimmers = @proof_category_swimmers.joins(:swimmer)
+      @proof_category_swimmers = @proof_category_swimmers.where("swimmers.name LIKE ?", "%#{params[:swimmer_name].strip}%")
+    end
+
+    # Ordenar por competição e prova
+    @proof_category_swimmers = @proof_category_swimmers.joins(proof: :competition).order("competitions.name ASC, proofs.name ASC")
+
+    # Paginação
+    @pagy, @proof_category_swimmers = pagy(@proof_category_swimmers, items: 20)
   end
 
   # GET /proof_category_swimmers/1 or /proof_category_swimmers/1.json
