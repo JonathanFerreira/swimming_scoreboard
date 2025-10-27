@@ -6,7 +6,7 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.4.4
-FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
+FROM docker.io/library/ruby:$RUBY_VERSION AS base
 
 # Rails app lives here
 WORKDIR /rails
@@ -25,16 +25,29 @@ ENV RAILS_ENV="production" \
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
-# Install packages needed to build gems
+# Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git pkg-config && \
+    apt-get install --no-install-recommends -y build-essential git node-gyp pkg-config python-is-python3 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Install JavaScript dependencies
+ARG NODE_VERSION=23.10.0
+ARG YARN_VERSION=1.22.22
+ENV PATH=/usr/local/node/bin:$PATH
+RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+    npm install -g yarn@$YARN_VERSION && \
+    rm -rf /tmp/node-build-master
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
+
+# Install node modules
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 # Copy application code
 COPY . .
@@ -46,6 +59,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 
+RUN rm -rf node_modules
 
 
 # Final stage for app image
