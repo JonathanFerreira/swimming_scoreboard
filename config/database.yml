@@ -5,20 +5,24 @@
 #   gem "sqlite3"
 #
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASS"] %>
+  host: <%= ENV["DB_HOST"] %>
+  port: <%= ENV["DB_PORT"] %>
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: swimming_scoreboard_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: storage/test.sqlite3
+  database: swimming_scoreboard_test
 
 
 # SQLite3 write its data on the local filesystem, as such it requires
@@ -29,4 +33,4 @@ test:
 # ensure the database is located in a persisted volume.
 production:
   <<: *default
-  database: storage/production.sqlite3
+  database: swimming_scoreboard_production

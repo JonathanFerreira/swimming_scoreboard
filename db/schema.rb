@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2025_10_26_211130) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "age_min", null: false
@@ -33,8 +36,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_211130) do
   end
 
   create_table "proof_categories", force: :cascade do |t|
-    t.integer "proof_id", null: false
-    t.integer "category_id", null: false
+    t.bigint "proof_id", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_proof_categories_on_category_id"
@@ -42,9 +45,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_211130) do
   end
 
   create_table "proof_category_swimmers", force: :cascade do |t|
-    t.integer "proof_id", null: false
-    t.integer "category_id", null: false
-    t.integer "swimmer_id", null: false
+    t.bigint "proof_id", null: false
+    t.bigint "category_id", null: false
+    t.bigint "swimmer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "idx_proof_category_swimmers_on_category_id"
@@ -56,7 +59,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_211130) do
   create_table "proofs", force: :cascade do |t|
     t.string "name"
     t.string "slug"
-    t.integer "competition_id", null: false
+    t.bigint "competition_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "lane_quantity"
@@ -69,7 +72,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_211130) do
     t.string "phone_number", null: false
     t.date "birthdate", null: false
     t.string "gender", null: false
-    t.integer "team_id"
+    t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["birthdate"], name: "index_swimmers_on_birthdate"
@@ -80,7 +83,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_211130) do
   end
 
   create_table "swimming_marker_blocks", force: :cascade do |t|
-    t.integer "swimming_marker_group_id", null: false
+    t.bigint "swimming_marker_group_id", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -89,8 +92,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_211130) do
   end
 
   create_table "swimming_marker_groups", force: :cascade do |t|
-    t.integer "proof_id", null: false
-    t.integer "category_id", null: false
+    t.bigint "proof_id", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_swimming_marker_groups_on_category_id"
@@ -98,8 +101,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_211130) do
   end
 
   create_table "swimming_marker_lanes", force: :cascade do |t|
-    t.integer "swimming_marker_block_id", null: false
-    t.integer "swimmer_id", null: false
+    t.bigint "swimming_marker_block_id", null: false
+    t.bigint "swimmer_id", null: false
     t.integer "lane"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -107,7 +110,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_211130) do
     t.index ["recorded_time"], name: "index_swimming_marker_lanes_on_recorded_time"
     t.index ["swimmer_id"], name: "index_swimming_marker_lanes_on_swimmer_id"
     t.index ["swimming_marker_block_id", "lane"], name: "idx_on_swimming_marker_block_id_lane_10e8ac75a6", unique: true
-    t.index ["swimming_marker_block_id", "swimmer_id"], name: "idx_swimming_marker_lanes_on_swimming_marker_block_id_swimmer_id", unique: true
+    t.index ["swimming_marker_block_id", "swimmer_id"], name: "idx_swi_mar_lan_on_swi_mar_blo_id_swi_id", unique: true
     t.index ["swimming_marker_block_id"], name: "index_swimming_marker_lanes_on_swimming_marker_block_id"
   end
 
