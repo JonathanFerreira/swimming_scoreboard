@@ -21,6 +21,9 @@
             Prova
           </th>
           <th scope="col" class="px-6 py-3">
+            Gênero
+          </th>
+          <th scope="col" class="px-6 py-3">
             Categorias
           </th>
           <th scope="col" class="px-6 py-3">
@@ -37,6 +40,9 @@
               </th>
               <td class="px-6 py-4">
                 <%= proof.name %>
+              </td>
+              <td class="px-6 py-4">
+                <%= Proof.genders[proof.gender] %>
               </td>
               <td class="px-6 py-4">
                 <%= proof.categories.map(&:name).join(", ") %>

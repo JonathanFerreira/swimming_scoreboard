@@ -1,15 +1,23 @@
 <div id="<%= dom_id proof %>" class="w-full sm:w-auto my-5 space-y-5">
   <div>
-    <strong class="block font-medium mb-1">Name:</strong>
+    <strong class="block font-medium mb-1">Nome da prova:</strong>
     <%= proof.name %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">Slug:</strong>
+    <strong class="block font-medium mb-1">Identificador da prova:</strong>
     <%= proof.slug %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">Competition:</strong>
-    <%= proof.competition.name %>
+    <strong class="block font-medium mb-1">Nome da competição:</strong>
+    <%= proof.competition_name %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Gênero:</strong>
+    <%= Proof.genders[proof.gender] %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Número de raias:</strong>
+    <%= proof.lane_quantity %>
   </div>
   <div>
     <strong class="block font-medium mb-1">Categorias:</strong>

@@ -4,7 +4,7 @@ class Admin::ProofsController < ApplicationController
 
   # GET /proofs or /proofs.json
   def index
-    @proofs = Proof.all
+    @proofs = Proof.order(:created_at)
   end
 
   # GET /proofs/1 or /proofs/1.json
@@ -66,7 +66,7 @@ class Admin::ProofsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def proof_params
-      params.require(:proof).permit(:name, :slug, :competition_id, :lane_quantity,
+      params.require(:proof).permit(:name, :slug, :competition_id, :lane_quantity, :gender,
                                    proof_categories_attributes: [:id, :category_id, :_destroy])
     end
 end
