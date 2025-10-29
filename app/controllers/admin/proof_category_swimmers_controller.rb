@@ -42,9 +42,7 @@ class Admin::ProofCategorySwimmersController < ApplicationController
   # POST /proof_category_swimmers or /proof_category_swimmers.json
   def create
     @proof_category_swimmer = ProofCategorySwimmer.new(proof_category_swimmer_params)
-    puts "================================================"
-    puts @proof_category_swimmer.inspect
-    puts "================================================"
+
     respond_to do |format|
       if @proof_category_swimmer.save
         format.html { redirect_to admin_proof_category_swimmer_path(@proof_category_swimmer), notice: "Vínculação de prova, categoria e nadador foi criada com sucesso." }
@@ -82,7 +80,7 @@ class Admin::ProofCategorySwimmersController < ApplicationController
   # GET /proof_category_swimmers/swimmers_by_category
   def swimmers_by_category
     category = Category.find(params[:category_id])
-    swimmers = Swimmer.by_age_range(category.age_min, category.age_max)
+    swimmers = Swimmer.by_age_range(category.age_min, category.age_max).order(:name)
 
     respond_to do |format|
       format.json { render json: swimmers.map { |swimmer| { id: swimmer.id, name: swimmer.name } } }
