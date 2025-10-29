@@ -1,5 +1,5 @@
 class Swimmer < ApplicationRecord
-  enum gender: {
+  GENDERS = {
     male: 'Masculino',
     female: 'Feminino'
   }

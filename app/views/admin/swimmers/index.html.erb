@@ -45,11 +45,11 @@
                 <%= swimmer.phone_number %>
               </td>
               <td class="px-6 py-4">
-                <%= swimmer.birthdate.strftime("%b %d, %Y") %>
+                <%= l(swimmer.birthdate) %>
               </td>
               <td class="px-6 py-4">
                 <span class="inline-flex rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
-                  <%= Swimmer.genders[swimmer.gender] %>
+                  <%= Swimmer::GENDERS[swimmer.gender.to_sym] %>
                 </span>
               </td>
               <td class="px-6 py-4">

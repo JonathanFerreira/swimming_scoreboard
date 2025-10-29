@@ -28,7 +28,7 @@
 
   <div class="my-5">
     <%= form.label :gender %>
-    <%= form.select :gender, Swimmer.genders.map { |key, value| [value, key] }, { include_blank: true }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": swimmer.errors[:gender].none?, "border-red-400 focus:outline-red-600": swimmer.errors[:gender].any?}] %>
+    <%= form.select :gender, Swimmer::GENDERS.map { |key, value| [value, key] }, { include_blank: true }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": swimmer.errors[:gender].none?, "border-red-400 focus:outline-red-600": swimmer.errors[:gender].any?}] %>
   </div>
 
   <div class="my-5">

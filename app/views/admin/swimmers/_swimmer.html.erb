@@ -1,22 +1,22 @@
 <div id="<%= dom_id swimmer %>" class="w-full sm:w-auto my-5 space-y-5">
   <div>
-    <strong class="block font-medium mb-1">Name:</strong>
+    <strong class="block font-medium mb-1">Nome:</strong>
     <%= swimmer.name %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">Phone number:</strong>
+    <strong class="block font-medium mb-1">Telefone:</strong>
     <%= swimmer.phone_number %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">Birthdate:</strong>
-    <%= swimmer.birthdate %>
+    <strong class="block font-medium mb-1">Data de nascimento:</strong>
+    <%= l(swimmer.birthdate) %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">Gender:</strong>
-    <%= Swimmer.genders[swimmer.gender] %>
+    <strong class="block font-medium mb-1">Gênero:</strong>
+    <%= Swimmer::GENDERS[swimmer.gender.to_sym] %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">Team:</strong>
+    <strong class="block font-medium mb-1">Time:</strong>
     <%= swimmer.team_name %>
   </div>
 </div>
