@@ -14,7 +14,7 @@ class Swimmer < ApplicationRecord
   delegate :name, to: :team, prefix: true, allow_nil: true
 
   def self.by_age_range(min_age, max_age)
-    where("(strftime('%Y', 'now') - strftime('%Y', birthdate)) BETWEEN ? AND ?", min_age, max_age)
+    where("EXTRACT(YEAR FROM AGE(birthdate)) BETWEEN ? AND ?", min_age, max_age)
   end
 
   def age
