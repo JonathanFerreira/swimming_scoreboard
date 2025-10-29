@@ -40,10 +40,10 @@ end
 
 proofs = []
 [
-  { name: '25 Livre', slug: 'prova-1', competition_id: competition.id, lane_quantity: 4, gender: Proof.genders.keys.sample },
-  { name: '25 Peito', slug: 'prova-2', competition_id: competition.id, lane_quantity: 4, gender: Proof.genders.keys.sample },
-  { name: '25 Costas', slug: 'prova-3', competition_id: competition.id, lane_quantity: 4, gender: Proof.genders.keys.sample },
-  { name: '25 Borboleta', slug: 'prova-3', competition_id: competition.id, lane_quantity: 4, gender: Proof.genders.keys.sample },
+  { name: '25 Livre', slug: 'prova-1', competition_id: competition.id, lane_quantity: 4, gender: Proof::GENDERS.keys.sample.to_s },
+  { name: '25 Peito', slug: 'prova-2', competition_id: competition.id, lane_quantity: 4, gender: Proof::GENDERS.keys.sample.to_s },
+  { name: '25 Costas', slug: 'prova-3', competition_id: competition.id, lane_quantity: 4, gender: Proof::GENDERS.keys.sample.to_s },
+  { name: '25 Borboleta', slug: 'prova-3', competition_id: competition.id, lane_quantity: 4, gender: Proof::GENDERS.keys.sample.to_s },
 ].each do |proof_data|
   proof = Proof.create!(proof_data)
   categories.each do |category|

@@ -13,7 +13,7 @@
   </div>
   <div>
     <strong class="block font-medium mb-1">Gênero:</strong>
-    <%= Proof.genders[proof.gender] %>
+    <%= Proof::GENDERS[proof.gender.to_sym] %>
   </div>
   <div>
     <strong class="block font-medium mb-1">Número de raias:</strong>

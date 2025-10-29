@@ -1,4 +1,9 @@
 class Proof < ApplicationRecord
+  GENDERS = {
+    male: 'Masculino',
+    female: 'Feminino'
+  }
+
   belongs_to :competition
 
   validates :name, :slug, :competition_id, :lane_quantity, :gender, presence: true
@@ -11,12 +16,8 @@ class Proof < ApplicationRecord
 
   delegate :name, to: :competition, prefix: true, allow_nil: true
 
-  enum gender: {
-    male: 'Masculino',
-    female: 'Feminino'
-  }
 
   def display_name
-    "#{competition.name} - #{name}"
+    "#{competition.name} - #{name} - #{GENDERS[gender.to_sym]}"
   end
 end

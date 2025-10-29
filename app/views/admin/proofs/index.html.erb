@@ -42,7 +42,7 @@
                 <%= proof.name %>
               </td>
               <td class="px-6 py-4">
-                <%= Proof.genders[proof.gender] %>
+                <%= Proof::GENDERS[proof.gender.to_sym] %>
               </td>
               <td class="px-6 py-4">
                 <%= proof.categories.map(&:name).join(", ") %>
