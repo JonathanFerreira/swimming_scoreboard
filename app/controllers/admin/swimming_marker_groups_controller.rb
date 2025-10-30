@@ -67,6 +67,18 @@ class Admin::SwimmingMarkerGroupsController < ApplicationController
     end
   end
 
+  def new_automatic_groups; end
+
+  def generate_automatic
+    if params[:competition_id].present?
+      competition = Competition.find(params[:competition_id])
+      Admin::SwimmingMarkerGroupGeneratorService.new(competition.id).call
+      redirect_to admin_swimming_marker_groups_path, notice: "Geração automática realizada com sucesso."
+    else
+      render :new_automatic_groups, status: :unprocessable_entity, alert: "Precisa selecionar uma competição."
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_swimming_marker_group

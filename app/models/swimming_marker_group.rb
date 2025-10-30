@@ -4,7 +4,7 @@ class SwimmingMarkerGroup < ApplicationRecord
   has_one :competition, through: :proof
   has_many :swimming_marker_blocks, dependent: :destroy
 
-  delegate :name, to: :proof, prefix: true, allow_nil: true
+  delegate :name, :display_name, to: :proof, prefix: true, allow_nil: true
   delegate :name, to: :category, prefix: true, allow_nil: true
   delegate :name, to: :competition, prefix: true, allow_nil: true
 

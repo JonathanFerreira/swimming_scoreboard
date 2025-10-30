@@ -1,0 +1,16 @@
+<% content_for :title, "Geração automática de grupos de balizamento" %>
+
+<div class="md:w-2/3 w-full">
+  <h1 class="font-bold text-4xl">Geração automática de grupos de balizamento</h1>
+
+  <%= form_with url: generate_automatic_admin_swimming_marker_groups_path, method: :post, local: true, class: "space-y-6" do |form| %>
+    <div class="my-5">
+        <%= form.label :competition_id %>
+        <%= form.collection_select :competition_id, Competition.all, :id, :name, { include_blank: 'Selecione uma competição' }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full"] %>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-3">
+      <%= form.submit "Enviar", class: "w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200" %>
+      <%= link_to "Voltar", admin_swimming_marker_groups_path, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-600 hover:bg-gray-700 text-white font-medium transition duration-200" %>
+    </div>
+  <% end %>
+</div>

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :swimming_marker_groups do
       collection do
         get :categories_by_proof
+        get :automatic
+        post :generate_automatic
       end
 
       resources :swimming_marker_blocks

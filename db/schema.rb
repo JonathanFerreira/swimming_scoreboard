@@ -89,7 +89,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_29_015452) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["position"], name: "index_swimming_marker_blocks_on_position", unique: true
+    t.index ["swimming_marker_group_id", "position"], name: "idx_on_swimming_marker_group_id_position_b02209aca8", unique: true
     t.index ["swimming_marker_group_id"], name: "index_swimming_marker_blocks_on_swimming_marker_group_id"
   end
 

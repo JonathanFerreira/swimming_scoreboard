@@ -3,8 +3,8 @@ class Admin::SwimmingMarkerBlockListsController < ApplicationController
 
   def index
     @swimming_marker_blocks = SwimmingMarkerBlock
-      .joins(:swimming_marker_group, :proof, :competition)
-      .order("competitions.id ASC, proofs.id ASC, swimming_marker_blocks.position ASC")
+      .joins(:swimming_marker_group, :proof, :competition, :category)
+      .order("competitions.id ASC, proofs.id ASC, categories.id ASC, swimming_marker_blocks.position ASC")
 
     # Aplicar filtros
     if params[:competition_id].present?

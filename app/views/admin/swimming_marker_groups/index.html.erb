@@ -7,7 +7,10 @@
 
   <div class="flex justify-between items-center mb-6">
     <h1 class="font-bold text-4xl">Grupo de balizamento</h1>
-    <%= link_to "Novo grupo de balizamento", new_admin_swimming_marker_group_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+    <div class="flex gap-3">
+      <%= link_to "Novo grupo", new_admin_swimming_marker_group_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium" %>
+      <%= link_to "Geração automática", automatic_admin_swimming_marker_groups_path, class: "rounded-md px-3.5 py-2.5 bg-green-600 hover:bg-green-500 text-white font-medium" %>
+    </div>
   </div>
 
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -36,7 +39,7 @@
                 <%= swimming_marker_group.competition_name %>
               </th>
               <td class="px-6 py-4">
-                <%= swimming_marker_group.proof_name %>
+                <%= swimming_marker_group.proof_display_name %>
               </td>
               <td class="px-6 py-4">
                 <%= swimming_marker_group.category_name %>

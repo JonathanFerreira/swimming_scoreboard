@@ -12,7 +12,7 @@ class SwimmingMarkerBlock < ApplicationRecord
   validate :validate_unique_swimmers
   validate :validate_quantity_of_lanes
 
-  delegate :name, to: :proof, prefix: true, allow_nil: true
+  delegate :name, :name_and_gender, to: :proof, prefix: true, allow_nil: true
   delegate :name, to: :category, prefix: true, allow_nil: true
   delegate :name, to: :competition, prefix: true, allow_nil: true
 
