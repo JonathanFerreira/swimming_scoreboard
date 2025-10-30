@@ -1,0 +1,152 @@
+<% content_for :title, "🏆 Resultados - #{@competition.name}" %>
+
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        🏆 Resultados
+      </h1>
+      <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-2">
+        <%= @competition.name %>
+      </h2>
+      <p class="text-lg text-gray-600">
+        <%= @competition.event_initial_date.strftime("%d/%m/%Y") %> -
+        <%= @competition.event_final_date.strftime("%d/%m/%Y") %>
+      </p>
+    </div>
+
+    <!-- Back Button -->
+    <div class="mb-8">
+      <%= link_to results_path, class: "inline-flex items-center text-blue-600 hover:text-blue-800 font-medium" do %>
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Voltar para Competições
+      <% end %>
+    </div>
+
+    <!-- Results by Proof and Category -->
+    <% if @results_by_proof_category.any? %>
+      <div class="space-y-12">
+        <% @results_by_proof_category.each do |key, data| %>
+          <div class="bg-white rounded-2xl shadow-xl border border-blue-200/50 overflow-hidden">
+            <!-- Proof and Category Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6 text-center">
+              <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
+                <%= data[:proof].name %>
+              </h3>
+              <p class="text-xl text-blue-100">
+                Categoria: <%= data[:category].name %>
+              </p>
+              <p class="text-sm text-blue-200 mt-1">
+                <%= data[:category].age_min %> a <%= data[:category].age_max %> anos -
+                <%= data[:proof].gender == 'male' ? 'Masculino' : 'Feminino' %>
+              </p>
+            </div>
+
+            <!-- Results Table -->
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Posição
+                    </th>
+                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Nadador
+                    </th>
+                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Equipe
+                    </th>
+                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Tempo
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <% if data[:results].any? %>
+                    <% data[:results].each_with_index do |result, index| %>
+                      <% has_time = result[:time].present? %>
+                      <tr class="<%= 'bg-yellow-50' if has_time && index < 3 %> <%= 'bg-gray-50' if !has_time %> hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="flex items-center">
+                            <% if has_time && index == 0 %>
+                              <span class="text-2xl">🥇</span>
+                            <% elsif has_time && index == 1 %>
+                              <span class="text-2xl">🥈</span>
+                            <% elsif has_time && index == 2 %>
+                              <span class="text-2xl">🥉</span>
+                            <% else %>
+                              <span class="text-lg font-semibold <%= has_time ? 'text-gray-600' : 'text-gray-400' %>">
+                                #<%= result[:position] %>
+                              </span>
+                            <% end %>
+                          </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm font-medium <%= has_time ? 'text-gray-900' : 'text-gray-500' %>">
+                            <%= result[:swimmer].name %>
+                          </div>
+                          <div class="text-sm text-gray-500">
+                            <%= result[:swimmer].age %> anos
+                          </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm <%= has_time ? 'text-gray-900' : 'text-gray-500' %>">
+                          <%= result[:swimmer].team_name || 'Sem equipe' %>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <% if has_time %>
+                            <span class="text-lg font-mono font-bold text-gray-900">
+                              <%= result[:time].strftime("%M:%S.%L") %>
+                            </span>
+                          <% else %>
+                            <span class="text-sm text-gray-400 italic">
+                              Tempo não registrado
+                            </span>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% else %>
+                    <tr>
+                      <td colspan="3" class="px-6 py-8 text-center text-gray-500 sm:hidden">
+                        <div class="flex flex-col items-center">
+                          <svg class="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                          </svg>
+                          <p class="text-lg font-medium">Nenhum nadador inscrito</p>
+                          <p class="text-sm">Não há nadadores inscritos para esta prova</p>
+                        </div>
+                      </td>
+                      <td colspan="4" class="px-6 py-8 text-center text-gray-500 hidden sm:block">
+                        <div class="flex flex-col items-center">
+                          <svg class="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                          </svg>
+                          <p class="text-lg font-medium">Nenhum nadador inscrito</p>
+                          <p class="text-sm">Não há nadadores inscritos para esta prova</p>
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <!-- Empty State -->
+      <div class="text-center py-16">
+        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md mx-auto border border-blue-200/50">
+          <svg class="w-16 h-16 text-blue-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">Nenhum Resultado Disponível</h3>
+          <p class="text-gray-600">Ainda não há resultados registrados para esta competição.</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

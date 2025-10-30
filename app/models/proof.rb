@@ -12,6 +12,7 @@ class Proof < ApplicationRecord
   has_many :proof_categories, dependent: :destroy
   has_many :categories, through: :proof_categories
   has_many :proof_category_swimmers, dependent: :destroy
+  has_many :swimming_marker_groups, dependent: :destroy
 
   accepts_nested_attributes_for :proof_categories, reject_if: :all_blank, allow_destroy: true
 

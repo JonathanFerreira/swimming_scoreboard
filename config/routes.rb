@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
 
   resources :home, only: [:index]
+  resources :results, only: [:index, :show]
 
   devise_for :users
 
