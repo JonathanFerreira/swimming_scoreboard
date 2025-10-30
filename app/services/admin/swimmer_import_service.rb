@@ -15,7 +15,7 @@ class Admin::SwimmerImportService
   def import_swimmers_from_excel
     spreadsheet = Roo::Spreadsheet.open(file.path)
     sheet = spreadsheet.sheet(0)
-
+    errors = []
     # Pular o cabeçalho (primeira linha)
     (2..sheet.last_row).each do |row|
       row_data = sheet.row(row)
@@ -24,7 +24,13 @@ class Admin::SwimmerImportService
 
       parsed_data = Admin::SwimmerArrayParser.new(row_data).call
 
-      Admin::SwimmerImportItemService.new(parsed_data).call
+      result = Admin::SwimmerImportItemService.new(parsed_data).call
+
+      unless result[:success]
+        errors << result[:error]
+      end
     end
+
+    puts errors.inspect
   end
 end

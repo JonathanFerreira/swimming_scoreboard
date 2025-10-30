@@ -8,9 +8,15 @@ class Admin::SwimmerImportItemService
     ApplicationRecord.transaction do
       swimmer = import_new_one
       import_proof_category_swimmers(swimmer)
+      { success: true }
     end
   rescue => e
-    Rails.logger.error "Erro ao importar nadador: #{e.message}"
+    Rails.logger.error "####################### Erro ao importar nadador: #{e.message}"
+    Rails.logger.error "####################### Original data: #{original_data}"
+    Rails.logger.error "####################### Parsed data: #{parsed_data}"
+    Rails.logger.error "####################### Error: #{e.backtrace.join("\n")}"
+    Rails.logger.error "####################### Error: #{e.backtrace.join("\n")}"
+    { success: false, error: [original_data, parsed_data, e.message] }
   end
 
   private
