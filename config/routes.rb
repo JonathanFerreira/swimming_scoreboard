@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :proofs
     resources :categories
     resources :swimmers
+    resources :swimmer_imports, only: [:new, :create]
     resources :teams
     resources :proof_category_swimmers do
       collection do

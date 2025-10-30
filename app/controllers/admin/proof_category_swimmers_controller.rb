@@ -20,7 +20,7 @@ class Admin::ProofCategorySwimmersController < ApplicationController
     end
 
     # Ordenar por competição e prova
-    @proof_category_swimmers = @proof_category_swimmers.joins(proof: :competition).order("competitions.name ASC, proofs.name ASC")
+    @proof_category_swimmers = @proof_category_swimmers.joins(proof: :competition).order("competitions.name ASC, swimmers.name ASC")
 
     # Paginação
     @pagy, @proof_category_swimmers = pagy(@proof_category_swimmers, items: 20)

@@ -5,6 +5,8 @@ class Swimmer < ApplicationRecord
   }
 
   belongs_to :team, optional: true
+  has_many :proof_category_swimmers, dependent: :destroy
+  has_many :proofs, through: :proof_category_swimmers
   has_many :swimming_marker_lanes, dependent: :destroy
   has_many :swimming_marker_blocks, through: :swimming_marker_lanes
 

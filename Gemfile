@@ -46,7 +46,6 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-
 end
 
 group :development do
@@ -62,3 +61,7 @@ gem "rondo_form", "~> 1.0"
 gem "pagy", "~> 9.4"
 
 gem "jsbundling-rails", "~> 1.3"
+
+gem 'csv', "3.3.5"
+# Excel file processing
+gem "roo", "~> 2.10"

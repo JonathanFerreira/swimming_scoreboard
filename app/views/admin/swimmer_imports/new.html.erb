@@ -1,0 +1,31 @@
+<% content_for :title, "Importar Nadadores" %>
+
+<div class="md:w-2/3 w-full">
+  <h1 class="font-bold text-4xl">Importar Nadadores</h1>
+
+  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+    <h3 class="font-semibold text-blue-800 mb-2">Instruções para o arquivo Excel:</h3>
+    <ul class="text-blue-700 text-sm space-y-1">
+      <li>• O arquivo deve estar no formato .xlsx</li>
+      <li>• A primeira linha deve conter os cabeçalhos das colunas</li>
+      <li>• As colunas devem estar na seguinte ordem:</li>
+      <li class="ml-4">1. Prova (obrigatório)</li>
+      <li class="ml-4">2. Nome (obrigatório)</li>
+      <li class="ml-4">3. Telefone (obrigatório)</li>
+      <li class="ml-4">4. Data de Nascimento (obrigatório) - formato: DD/MM/AAAA</li>
+      <li class="ml-4">5. Gênero (obrigatório) - Masculino/Feminino ou M/F</li>
+    </ul>
+  </div>
+
+  <%= form_with url: admin_swimmer_imports_path, method: :post, multipart: true, local: true, class: "space-y-6" do |form| %>
+    <div>
+      <%= form.label :file, "Arquivo Excel (.xlsx)", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.file_field :file, accept: ".xlsx", required: true, class: "block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" %>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3">
+      <%= form.submit "Importar Nadadores", class: "w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200" %>
+      <%= link_to "Voltar para Nadadores", admin_swimmers_path, class: "w-full sm:w-auto text-center bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-md transition duration-200" %>
+    </div>
+  <% end %>
+</div>

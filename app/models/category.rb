@@ -7,6 +7,10 @@ class Category < ApplicationRecord
 
   validate :validate_age_range_exists
 
+  def self.find_by_age(age)
+    where("age_min <= ? AND age_max >= ?", age, age).first
+  end
+
   private
 
   def validate_age_range_exists
