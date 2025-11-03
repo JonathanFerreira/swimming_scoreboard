@@ -4,7 +4,13 @@ class Admin::SwimmersController < ApplicationController
 
   # GET /swimmers or /swimmers.json
   def index
-    @pagy, @swimmers = pagy(Swimmer.all)
+    if params[:swimmer_name].present?
+      @swimmers = Swimmer.where("name LIKE ?", "%#{params[:swimmer_name].strip}%").order(created_at: :desc)
+    else
+      @swimmers = Swimmer.order(created_at: :desc)
+    end
+
+    @pagy, @swimmers = pagy(@swimmers)
   end
 
   # GET /swimmers/1 or /swimmers/1.json
