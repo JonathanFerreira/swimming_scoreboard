@@ -5,10 +5,15 @@ class Admin::SwimmerImportItemService
   end
 
   def call
-    ApplicationRecord.transaction do
-      swimmer = import_new_one
-      import_proof_category_swimmers(swimmer)
-      { success: true }
+    swimmer_exists = Swimmer.find_by(name: parsed_data[:swimmer_data][:name])
+    if swimmer_exists.present?
+      return { success: false, error: [original_data, parsed_data, "Nadador já existe"] }
+    else
+      ApplicationRecord.transaction do
+        swimmer = import_new_one
+        import_proof_category_swimmers(swimmer)
+        { success: true }
+      end
     end
   rescue => e
     Rails.logger.error "####################### Erro ao importar nadador: #{e.message}"
@@ -34,11 +39,10 @@ class Admin::SwimmerImportItemService
 
   def import_proof_category_swimmers(swimmer)
     proof_ids = parsed_data[:proof_ids]
-    category = Category.find_by_age(swimmer.age)
 
     proof_ids.each do |proof_id|
-      proof = Proof.find(proof_id)
-      swimmer.proof_category_swimmers.create!(proof: proof, category: category)
+      category = Category.find_by_age_and_proof_id(swimmer.age, proof_id)
+      swimmer.proof_category_swimmers.create!(proof_id: proof_id, category_id: category.id)
     end
   end
 end

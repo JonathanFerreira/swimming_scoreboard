@@ -1,6 +1,7 @@
 class Admin::SwimmerArrayParser
-  def initialize(array_data)
+  def initialize(array_data, competition_id)
     @array_data = array_data
+    @competition_id = competition_id
   end
 
   def call
@@ -9,7 +10,7 @@ class Admin::SwimmerArrayParser
 
   private
 
-  attr_reader :array_data
+  attr_reader :array_data, :competition_id
 
   def parse_data
     proof_name = array_data[0]
@@ -79,7 +80,7 @@ class Admin::SwimmerArrayParser
     proof_names = proof_name.split('+')
 
     proof_names.each do |proof_name|
-      proof = Proof.find_by(slug: proof_name.strip.gsub(' ', '').downcase, gender: gender)
+      proof = Proof.find_by(slug: proof_name.strip.gsub(' ', '').downcase, gender: gender, competition_id: competition_id)
       proof_ids << proof.id if proof.present?
     end
 

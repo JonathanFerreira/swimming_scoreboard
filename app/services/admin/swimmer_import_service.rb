@@ -1,9 +1,9 @@
 class Admin::SwimmerImportService
-  attr_reader :file, :data
+  attr_reader :file, :competition_id
 
-  def initialize(file)
-    # @file = File.open(Rails.root.join('tmp', 'exemplo-planilha-importacao-simplificado.xlsx'))
+  def initialize(file, competition_id)
     @file = file
+    @competition_id = competition_id
   end
 
   def call
@@ -22,7 +22,7 @@ class Admin::SwimmerImportService
 
       next if row_data.compact.empty? # Pular linhas vazias
 
-      parsed_data = Admin::SwimmerArrayParser.new(row_data).call
+      parsed_data = Admin::SwimmerArrayParser.new(row_data, competition_id).call
 
       result = Admin::SwimmerImportItemService.new(parsed_data).call
 
