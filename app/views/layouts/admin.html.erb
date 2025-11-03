@@ -21,17 +21,17 @@
   <body class="bg-gray-50">
     <% if user_signed_in? %>
       <!-- Logged in user - show full admin interface -->
-      <div class="flex h-screen bg-gray-100">
+      <div class="flex min-h-screen bg-gray-100">
         <!-- Desktop Sidebar -->
         <%= render 'shared/sidebar' %>
 
         <!-- Mobile menu button and content wrapper -->
-        <div class="flex flex-1 flex-col">
+        <div class="flex flex-1 flex-col min-w-0">
           <!-- Mobile menu button -->
           <%= render 'shared/mobile_sidebar' %>
 
           <!-- Main content -->
-          <main class="flex-1">
+          <main class="flex-1 min-h-0">
             <div class="py-6">
               <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
                 <%= yield %>
