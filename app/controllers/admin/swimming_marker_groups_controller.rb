@@ -67,7 +67,7 @@ class Admin::SwimmingMarkerGroupsController < ApplicationController
     end
   end
 
-  def new_automatic_groups; end
+  def automatic; end
 
   def generate_automatic
     if params[:competition_id].present?
