@@ -10,36 +10,7 @@
     <%= link_to "Nova vínculação", new_admin_proof_category_swimmer_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
-  <!-- Filtros -->
-  <%= form_with url: admin_proof_category_swimmers_path, method: :get, local: true, class: "bg-white p-6 rounded-lg shadow-md mb-6" do |form| %>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-      <div>
-        <%= form.label :competition_id, "Competição", class: "block text-sm font-medium text-gray-700 mb-2" %>
-        <%= form.collection_select :competition_id, Competition.all, :id, :name,
-            { include_blank: 'Todas as competições', selected: params[:competition_id] },
-            { class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" } %>
-      </div>
-
-      <div>
-        <%= form.label :proof_id, "Prova", class: "block text-sm font-medium text-gray-700 mb-2" %>
-        <%= form.collection_select :proof_id, Proof.all, :id, :display_name,
-            { include_blank: 'Todas as provas', selected: params[:proof_id] },
-            { class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" } %>
-      </div>
-
-      <div>
-        <%= form.label :swimmer_name, "Nome do Nadador", class: "block text-sm font-medium text-gray-700 mb-2" %>
-        <%= form.text_field :swimmer_name, value: params[:swimmer_name],
-            placeholder: "Digite o nome do nadador",
-            class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
-      </div>
-
-      <div class="flex space-x-2">
-        <%= form.submit "Buscar", class: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
-        <%= link_to "Limpar", admin_proof_category_swimmers_path, class: "px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500" %>
-      </div>
-    </div>
-  <% end %>
+  <%= render "filter" %>
 
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
