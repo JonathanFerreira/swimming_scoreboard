@@ -10,8 +10,9 @@ class SwimmingMarkerLane < ApplicationRecord
   validates :swimmer_id, presence: true, uniqueness: { scope: :swimming_marker_block_id }
 
   delegate :position, to: :swimming_marker_block, prefix: true, allow_nil: true
-  delegate :name, to: :proof, prefix: true, allow_nil: true
+  delegate :name, :name_and_gender, to: :proof, prefix: true, allow_nil: true
   delegate :name, to: :competition, prefix: true, allow_nil: true
+  delegate :name, to: :category, prefix: true, allow_nil: true
 
   # Métodos para trabalhar com tempos
   def recorded_time_formatted

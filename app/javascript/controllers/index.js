@@ -18,3 +18,9 @@ application.register("swimmer-loader", SwimmerLoaderController)
 
 import TimeEditorController from "./time_editor_controller"
 application.register("time-editor", TimeEditorController)
+
+import RefereeTimeDisplayController from "./referee_time_display_controller"
+application.register("referee-time-display", RefereeTimeDisplayController)
+
+import TimeModalController from "./time_modal_controller"
+application.register("time-modal", TimeModalController)

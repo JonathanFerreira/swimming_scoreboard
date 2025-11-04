@@ -37,6 +37,18 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :referee do
+    resources :swimming_marker_lanes, only: [:index] do
+      member do
+        patch :update_time
+      end
+
+      collection do
+        get :categories_by_proof
+      end
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

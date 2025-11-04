@@ -1,0 +1,29 @@
+<!-- Filtros -->
+<%= form_with url: referee_swimming_marker_lanes_path, method: :get, local: true, class: "bg-white p-6 rounded-lg shadow-md mb-6" do |form| %>
+  <div data-controller="category-by-proof-loader"
+     data-category-by-proof-loader-url-value="/referee/swimming_marker_lanes/categories_by_proof">
+    <div class="my-5">
+      <%= form.label :proof_id, 'Prova' %>
+      <%= form.collection_select :proof_id, Proof.all, :id, :display_name, { include_blank: 'Todas as provas', selected: params[:proof_id] },
+      data: { category_by_proof_loader_target: "proofSelect", action: "change->category-by-proof-loader#loadCategories" },
+      class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full"] %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :category_id, 'Categoria' %>
+      <%= form.collection_select :category_id, [], :id, :name, { include_blank: 'Todas as categorias', selected: params[:category_id] }, {
+      data: {
+        category_by_proof_loader_target: "categorySelect",
+        swimmer_loader_target: "categorySelect",
+        action: "change->swimmer-loader#loadSwimmers"
+      },
+      class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full"]
+      } %>
+    </div>
+
+    <div class="flex space-x-2 justify-end">
+      <%= form.submit "Buscar", class: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      <%= link_to "Limpar", referee_swimming_marker_lanes_path, class: "px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500" %>
+    </div>
+  </div>
+<% end %>
