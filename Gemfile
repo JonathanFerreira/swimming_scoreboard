@@ -58,7 +58,7 @@ gem "devise", "~> 4.9"
 
 gem "rondo_form", "~> 1.0"
 
-gem "pagy", "~> 9.4"
+gem "pagy", "~> 43.0"
 
 gem "jsbundling-rails", "~> 1.3"
 
