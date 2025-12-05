@@ -64,4 +64,4 @@ gem "jsbundling-rails", "~> 1.3"
 
 gem 'csv', "3.3.5"
 # Excel file processing
-gem "roo", "~> 2.10"
+gem "roo", "~> 3.0"
